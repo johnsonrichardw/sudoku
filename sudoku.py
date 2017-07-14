@@ -17,8 +17,6 @@ class sudoku():
 
     def rows_valid(self,x,y):
         used = [False for i in range(BOARD_SIZE+1)]
-        for i in used:
-            used[i] = False
         for c_x in range(BOARD_SIZE):
             if self.board[c_x][y] != 0 and used[self.board[c_x][y]] == True:
                 return False
@@ -27,8 +25,6 @@ class sudoku():
                 
     def columns_valid(self,x,y):
         used = [False for i in range(BOARD_SIZE+1)]
-        for i in used:
-            used[i] = False
         for c_y in range(BOARD_SIZE):
             if self.board[x][c_y] != 0 and used[self.board[x][c_y]] == True:
                 return False
@@ -39,8 +35,6 @@ class sudoku():
         used = [False for i in range(BOARD_SIZE+1)]
         n_x = int(x/3)
         n_y = int(y/3)
-        for i in used:
-            used[i] = False
         for c_x in range(int(BOARD_SIZE/3)):
             for c_y in range(int(BOARD_SIZE/3)):
                 a_x = c_x + n_x * 3
