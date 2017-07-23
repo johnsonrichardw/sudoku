@@ -19,7 +19,6 @@ void variable::set_value(int value)
 {
   _set = true;
   _value = value;
-  remove_domain_value(value);
 }
 
 int variable::get_value()
