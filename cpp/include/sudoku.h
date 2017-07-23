@@ -11,6 +11,7 @@ class sudoku
 {
   protected:
     variable*** _board;
+    int _constraints_propagated;
 
     void init_board();
     void update_domains(int value, int x, int y);

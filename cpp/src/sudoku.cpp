@@ -6,11 +6,13 @@
 
 sudoku::sudoku()
 {
+  _constraints_propagated = 0;
   init_board();
 }
 
 sudoku::sudoku(const sudoku& obj)
 {
+  _constraints_propagated = obj._constraints_propagated;
   _board = new variable**[SIZE];
   for (int x = 0; x < SIZE; x++)
   {
@@ -97,6 +99,7 @@ void sudoku::propagate_constraints()
       value = _board[x][y]->get_domain()[0];
       set_value(value,x,y);
       updated_domain = true;
+      _constraints_propagated++;
       //std::cout << "Propagated constraint value: " << value << " at (" << x << "," << y << ")\n";
     }
   } while (updated_domain);
@@ -178,5 +181,8 @@ void sudoku::print_board()
     std::cout << "|" << std::endl;
   }
   std::cout << sep << std::endl;
+
+  std::cout << "Number of constraint progations: " << _constraints_propagated
+    << std::endl;
 }
 
