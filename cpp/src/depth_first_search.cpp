@@ -3,8 +3,12 @@
 #include "variable.h"
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <random>
+#include <chrono>
 
-depth_first_search::depth_first_search()
+depth_first_search::depth_first_search():
+  gen(std::chrono::system_clock::now().time_since_epoch().count())
 {
 }
 
@@ -46,6 +50,9 @@ bool depth_first_search::execute()
 
     curr_board->next_open_cell(x,y);
     var = curr_board->get_variable_at(x,y);
+
+    //Shuffle the domain to randomly stack the next states
+    std::shuffle(var->get_domain().begin(),var->get_domain().end(),gen);
 
     //Create a new state for each value in the current open cell's domain
     for (auto it = var->get_domain().begin(); it != var->get_domain().end(); it++)
