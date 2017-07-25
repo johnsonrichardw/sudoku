@@ -28,7 +28,7 @@ void depth_first_search::init(sudoku* init_state)
   _stack.push(new sudoku(*init_state));
 }
 
-bool depth_first_search::execute()
+bool depth_first_search::execute(bool display_result)
 {
   int iter = 0;
   sudoku * curr_board;
@@ -48,7 +48,7 @@ bool depth_first_search::execute()
     curr_board = _stack.top();
     _stack.pop();
 
-    curr_board->next_open_cell(x,y);
+    curr_board->next_cell(x,y);
     var = curr_board->get_variable_at(x,y);
 
     //Shuffle the domain to randomly stack the next states
@@ -65,8 +65,11 @@ bool depth_first_search::execute()
       {
         if (new_board->solution_check())
         {
-          std::cout << "Solution found in " << iter << " iterations:" << std::endl;
-          new_board->print_board();
+          if (display_result)
+          {
+            std::cout << "Solution found in " << iter << " iterations:" << std::endl;
+            new_board->print_board();
+          }
           return true;
         }
         _stack.push(new_board);

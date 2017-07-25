@@ -136,6 +136,50 @@ void sudoku::set_value(int value, int x, int y)
   }
 }
 
+bool sudoku::next_cell(int& x, int& y)
+{
+  //return next_smallest_domain(x,y);
+  return next_open_cell(x,y);
+}
+
+bool sudoku::next_smallest_domain(int& x, int& y)
+{
+  int m_x,m_y;
+  bool set = false;
+
+  for (int _x = 0; _x < SIZE; _x++)
+  {
+    for (int _y = 0; _y < SIZE; _y++)
+    {
+      if (!set && !_board[_x][_y]->is_set())
+      {
+        set = true;
+        m_x = _x;
+        m_y = _y;
+      }
+
+      if (set && !_board[_x][_y]->is_set() &&
+          _board[_x][_y]->get_domain_size() <
+          _board[m_x][m_y]->get_domain_size())
+      {
+        m_x = _x;
+        m_y = _y;
+      }
+    }
+  }
+
+  if (!set)
+  {
+    //std::cout << "No variable found\n";
+    return false;
+  }
+
+  //std::cout << "Variable found\n";
+  x = m_x;
+  y = m_y;
+  return true;
+}
+
 bool sudoku::next_open_cell(int& x, int& y)
 {
   for (int _x = 0; _x < SIZE; _x++)

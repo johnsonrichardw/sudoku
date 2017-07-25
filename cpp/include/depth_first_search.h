@@ -17,7 +17,7 @@ class depth_first_search
     ~depth_first_search();
 
     void init(sudoku* init_state);
-    bool execute();
+    bool execute(bool display_result);
 };
 
 #endif

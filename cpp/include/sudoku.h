@@ -19,6 +19,8 @@ class sudoku
     void update_column_domains(int value, int x, int y);
     void update_ninth_domains(int value, int x, int y);
     bool find_domain_of_one(int& x,int& y);
+    bool next_open_cell(int& x, int& y);
+    bool next_smallest_domain(int& x, int& y);
 
   public:
     sudoku();
@@ -28,7 +30,7 @@ class sudoku
     bool domain_wipeout();
     void set_value(int value, int x, int y);
     void propagate_constraints();
-    bool next_open_cell(int& x, int& y);
+    bool next_cell(int& x, int& y);
     variable* get_variable_at(int x,int y);
     bool solution_check();
     void print_board();

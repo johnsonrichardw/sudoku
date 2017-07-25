@@ -6,15 +6,18 @@ int main(int argc, char ** argv)
   sudoku* s;
   depth_first_search* dfs;
 
-  s = new sudoku();
-  dfs = new depth_first_search();
+  for (int i = 0; i < 10; i++)
+  {
+    s = new sudoku();
+    dfs = new depth_first_search();
 
-  dfs->init(s);
-  delete s;
+    dfs->init(s);
+    delete s;
 
-  dfs->execute();
+    dfs->execute(true);
 
-  delete dfs;
+    delete dfs;
+  }
 
   return 0;
 }
